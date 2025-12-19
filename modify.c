@@ -58,6 +58,7 @@ void modify()
                         newname[i]=toupper(newname[i]);
                 }
                 strcpy(acc[found].name, newname);
+                printf("name updated successfully.\n");
             }
         }
         else if(!strcmp(choice,"2"))
@@ -90,6 +91,7 @@ void modify()
                     continue;
                 }
                 strcpy(acc[found].mobile, newmobile);
+                printf("mobile number updated successfully.\n");
                 break;
             }
         }
@@ -112,11 +114,13 @@ void modify()
                 }
 
                 strcpy(acc[found].email, newemail);
+                printf("mobile number updated successfully.\n");
                 break;
             }
         }
 
     }
 }
+
 
 
