@@ -19,8 +19,8 @@ void first_menu()
         }
         else if (!strcmp(choice,"2") || !strcasecmp(choice,"QUIT"))
         {
-            printf("Exiting program.\n");
-            break;
+            quit();
         }
     }
 }
+
