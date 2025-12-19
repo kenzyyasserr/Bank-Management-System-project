@@ -10,10 +10,10 @@ by a '\0' NULL character. It is used to store multiple strings in a single array
 ```
 char arr[r][m] = {s1, s2, ...., sn};
 ```
-<ins> arr:</ins> array name
-<ins> r:</ins> maximum number of strings to be stored in the array
-<ins> m:</ins> maximum number of character values that can be stored in each string
-<ins> s1, s2, ...., sn:</ins> stored strings
+<ins> arr:</ins> array name<br />
+<ins> r:</ins> maximum number of strings to be stored in the array<br />
+<ins> m:</ins> maximum number of character values that can be stored in each string<br />
+<ins> s1, s2, ...., sn:</ins> stored strings<br />
 
 However, this method leads to a wastage of memory since there may be  strings shorter than **m** yet, their place is already reserved, so after some research a more suitable and realistic way was found an *Array of strings using pointers*.
 
@@ -21,6 +21,6 @@ However, this method leads to a wastage of memory since there may be  strings sh
 ```
 char *arr[] = { "Array", "Strings", "arrayOfStrings" };
 ```
-<ins> char *:</ins> indicates that each element in the array is a pointer to a character (each points to a string)
-<ins> arr[]:</ins> Declares an array of pointers, where the size is determined by the number of strings in the initialisation list.
-<ins> = { "Array", "Strings", "arrayOfStrings" }:</ins> Initialises the array, with each pointer pointing to a string: arr[0] points to "Geek", arr[1] to "Geeks", and arr[2] to "Geekfor".
+<ins> char *:</ins> indicates that each element in the array is a pointer to a character (each points to a string)<br />
+<ins> arr[]:</ins> Declares an array of pointers, where the size is determined by the number of strings in the initialisation list.<br />
+<ins> = { "Array", "Strings", "arrayOfStrings" }:</ins> Initialises the array, with each pointer pointing to a string: arr[0] points to "Geek", arr[1] to "Geeks", and arr[2] to "Geekfor".<br />
