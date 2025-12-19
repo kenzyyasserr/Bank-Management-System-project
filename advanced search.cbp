@@ -1,0 +1,47 @@
+void advanced_search()
+{
+    char keyword[MAX_KEYWORD];
+    int foundit = 0;
+
+    printf("Enter keyword to search in Name: ");
+    fgets(keyword,sizeof(keyword),stdin);
+    keyword[strcspn(keyword, "\n")]='\0';
+
+    for (int i = 0; keyword[i]; i++)
+        keyword[i] = tolower(keyword[i]);  // lowercase keyword
+
+    printf("\nSearch Results:\n");
+    printf("----------------\n");
+
+    for (int i = 0; i < accCounter; i++)
+    {
+        char nameLower[MAX_BUFFER];
+        strcpy(nameLower, acc[i].name);
+
+        for (int j = 0; nameLower[j]; j++)
+            nameLower[j] = tolower(nameLower[j]);  // lowercase the name
+
+        char *token = strtok(nameLower, " ");
+        while (token != NULL)
+        {
+            if (strstr(token, keyword) != NULL)
+            {
+                printf("Account Number: %s\n", acc[i].accountNumber);
+                printf("Name          : %s\n", acc[i].name);
+                printf("Email         : %s\n", acc[i].email);
+                printf("Mobile        : %s\n", acc[i].mobile);
+                printf("Balance       : %.2f\n", acc[i].balance);
+                printf("Status        : %s\n", acc[i].status);
+                printf("Open Date     : %02d/%d\n", acc[i].open.month, acc[i].open.year);
+                printf("----------------\n");
+                foundit = 1;
+                break;
+            }
+            token = strtok(NULL, " ");
+        }
+    }
+
+    if (!foundit)
+        printf("No matches are found.\n");
+}
+
