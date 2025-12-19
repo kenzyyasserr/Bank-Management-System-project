@@ -45,53 +45,55 @@ void modify()
             return;
         }
 
+
         if (!strcmp(choice, "1"))
         {
             printf("Enter new Name: ");
             if (fgets(newname,sizeof(newname),stdin))
             {
                 newname[strcspn(newname, "\n")]='\0';
-                for (int i=0;newname[i]!='\0';i++)
+                for (int i=0; newname[i]!='\0'; i++)
                 {
                     if (i==0 || newname[i -1]==' ')
-                    newname[i]=toupper(newname[i]);
+                        newname[i]=toupper(newname[i]);
                 }
                 strcpy(acc[found].name, newname);
             }
         }
-      else if(!strcmp(choice,"2"))
-{
-    while (1)
-    {
-        printf("Enter new Mobile (11 digits): ");
-        if (!fgets(newmobile,sizeof(newmobile),stdin))
-            continue;
-
-        newmobile[strcspn(newmobile,"\n")] = '\0';
-
-        if (strlen(newmobile)!= 11)
+        else if(!strcmp(choice,"2"))
         {
-            printf("Invalid mobile number! Must be exactly 11 digits.\n");
-            continue;
-        }
-        int valid=1;
-        for (int i=0;newmobile[i]!='\0';i++)
-        {
-            if (newmobile[i]<'0' || newmobile[i]>'9')
+            while (1)
             {
-                valid = 0;
+                printf("Enter new Mobile (11 digits): ");
+                if (!fgets(newmobile,sizeof(newmobile),stdin))
+                    continue;
+
+                newmobile[strcspn(newmobile,"\n")] = '\0';
+
+                if (strlen(newmobile)!= 11)
+                {
+                    printf("Invalid mobile number! Must be exactly 11 digits.\n");
+                    continue;
+                }
+                int valid=1;
+                for (int i=0; newmobile[i]!='\0'; i++)
+                {
+                    if (newmobile[i]<'0' || newmobile[i]>'9')
+                    {
+                        valid = 0;
+                        break;
+                    }
+                }
+                if (!valid)
+                {
+                    printf("Invalid mobile number! Must contain only digits.\n");
+                    continue;
+                }
+                strcpy(acc[found].mobile, newmobile);
                 break;
             }
         }
-        if(!valid)
-        {
-            printf("Invalid mobile number! Must contain only digits.\n");
-            continue;
-        }
-        strcpy(acc[found].mobile, newmobile);
-        break;
-    }
-}
+
         else if(!strcmp(choice,"3"))
         {
             while(1)
@@ -100,16 +102,21 @@ void modify()
                 if(!fgets(newemail,sizeof(newemail),stdin))
                     continue;
 
-                newemail[strcspn(newemail,"\n")]='\0';
+                newemail[strcspn(newemail,"\n")] = '\0';
 
-                if(strchr(newemail,'@')==NULL)
+
+                if(!emailvalidation(newemail))
                 {
-                    printf("Invalid email! Must contain '@'.\n");
+                    printf("Invalid email!\nPlease enter a valid email (e.g., example@mail.com).\n");
                     continue;
                 }
+
                 strcpy(acc[found].email, newemail);
                 break;
             }
         }
+
     }
 }
+
+
