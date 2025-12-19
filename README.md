@@ -11,4 +11,5 @@ by a '\0' NULL character. It is used to store multiple strings in a single array
   
     for (int i = 0; i < 3; i++)
         printf("%s\n", arr[i]);
-    return 0;```
+    return 0;
+```
