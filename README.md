@@ -4,8 +4,7 @@ In this code, the main aim is to be able to print the file "accounts.txt" in a s
 ## Approach
 First, the file "accounts.txt"
 
-**Vector of strings:** it's an array of strings, which is a 2D array where each row contains a sequence of characters terminated 
-by a '\0' NULL character. It is used to store multiple strings in a single array.
+**Vector of strings:** it's an array of strings, which is a 2D array where each row contains a sequence of characters terminated by a '\0' NULL character. It is used to store multiple strings in a single array.
 
 ```
 char arr[r][m] = {s1, s2, ...., sn};
@@ -23,4 +22,6 @@ char *arr[] = { "Array", "Strings", "arrayOfStrings" };
 ```
 <ins> char *:</ins> indicates that each element in the array is a pointer to a character (each points to a string)<br />
 <ins> arr[]:</ins> Declares an array of pointers, where the size is determined by the number of strings in the initialisation list.<br />
-<ins> = { "Array", "Strings", "arrayOfStrings" }:</ins> Initialises the array, with each pointer pointing to a string: arr[0] points to "Geek", arr[1] to "Geeks", and arr[2] to "Geekfor".<br />
+<ins> = { "Array", "Strings", "arrayOfStrings" }:</ins> Initialises the array, with each pointer pointing to a string: arr[0] points to "Array", arr[1] to "Strings", and arr[2] to "arrayOfStrings".<br />
+
+**qsort() Function:** The qsort() in C is a library function defined inside <stdlib.h> header file, used to sort an array of items in ascending order or descending order. It stands for "quick sort," as it implements the quicksort algorithm for sorting which is one of the fastest and most efficient algorithms to sort the array.
