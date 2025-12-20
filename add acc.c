@@ -1,4 +1,3 @@
-/* ===== ADD ACCOUNT ===== */
 void add_account(void)
 {
     char newaccount[11];
@@ -25,7 +24,10 @@ void add_account(void)
         if (!digit(newaccount))
             printf("Invalid input. Digits only!\n");
         else if (accountexist(newaccount))
+        {
             printf("Duplicate account number!\n");
+            clean_stdin();
+        }
         else
             break;
     }
@@ -128,4 +130,5 @@ void add_account(void)
            tm.tm_hour, tm.tm_min, tm.tm_sec);
 
     clean_stdin();
+    confirm_save();
 }
