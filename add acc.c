@@ -114,7 +114,7 @@ void add_account(void)
     strcpy(acc[accCounter].email, addemail);
     strcpy(acc[accCounter].mobile, addmobile);
     acc[accCounter].balance = 0.0;
-    strcpy(acc[accCounter].status, "ACTIVE");
+    strcpy(acc[accCounter].status, "active");
 
     /* CURRENT DATE AND TIME */
     time_t t = time(NULL);
@@ -132,3 +132,4 @@ void add_account(void)
     clean_stdin();
     confirm_save();
 }
+
