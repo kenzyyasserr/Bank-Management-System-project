@@ -6,6 +6,8 @@ void load_accounts()
         printf("Error could not open account.txt\n");
         exit(1);
     }
+
+
     accCounter=0;
     while(!feof(accounts))
     {
@@ -17,12 +19,11 @@ void load_accounts()
         fscanf(accounts, "%11[^,],",acc[accCounter].mobile);
         fscanf(accounts,"%d-%d,",&acc[accCounter].open.month,&acc[accCounter].open.year);
         fscanf(accounts,"%19[^,\n]",acc[accCounter].status);
-        
+
         char *p=acc[accCounter].status;
         while(*p==' ')  p++;
         strcpy(acc[accCounter].status,p);
         accCounter++;
     }
     fclose(accounts);
-}5
-
+}
