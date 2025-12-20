@@ -4,6 +4,7 @@ void modify()
     char newmobile[14];
     char newemail[2 * max_input];
     char choice[20];
+    int modified=0;
 
     int found = get_account_index();
 
@@ -38,6 +39,7 @@ void modify()
                     else
                         newname[i] = tolower(newname[i]);
                 strcpy(acc[found].name, newname);
+                modified=1;
                 printf("Name updated successfully.\n");
             }
         }
@@ -60,6 +62,7 @@ void modify()
                 }
 
                 strcpy(acc[found].mobile, newmobile);
+                   modified=1;
                 printf("Mobile number updated successfully.\n");
                 break;
             }
@@ -79,6 +82,7 @@ void modify()
                 }
 
                 strcpy(acc[found].email, newemail);
+                   modified=1;
                 printf("Email updated successfully.\n");
                 break;
             }
@@ -93,10 +97,10 @@ void modify()
         printf("Mobile : %s\n", acc[found].mobile);
         printf("E-mail : %s\n\n", acc[found].email);
     }
+    if(modified)
+        confirm_save();
 }
 
 
-       
 
-             
-           
+
