@@ -2,6 +2,12 @@ void advanced_search()
 {
     char keyword[MAX_KEYWORD];
     int foundit = 0;
+    const char *months[] =
+    {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
+
 
     printf("Enter keyword to search in Name: ");
     fgets(keyword,sizeof(keyword),stdin);
@@ -28,11 +34,19 @@ void advanced_search()
             {
                 printf("Account Number: %s\n", acc[i].accountNumber);
                 printf("Name          : %s\n", acc[i].name);
-                printf("Email         : %s\n", acc[i].email);
+                printf("E-mail        : %s\n", acc[i].email);
+                printf("Balance       : %.2f $\n", acc[i].balance);
                 printf("Mobile        : %s\n", acc[i].mobile);
-                printf("Balance       : %.2f\n", acc[i].balance);
-                printf("Status        : %s\n", acc[i].status);
-                printf("Open Date     : %02d/%d\n", acc[i].open.month, acc[i].open.year);
+                printf("Date Opened   : %s %d\n",months[acc[i].open.month - 1],acc[i].open.year);
+                char status_print[20];
+                strcpy(status_print, acc[i].status);
+
+                for (int j = 0; status_print[j]; j++)
+                    status_print[j] = tolower(status_print[j]);
+
+                status_print[0] = toupper(status_print[0]);
+
+                printf("Status        : %s\n", status_print);
                 printf("----------------\n");
                 foundit = 1;
                 break;
