@@ -65,7 +65,7 @@ void printSorted(account arr[], const char *filename)
     int s, count = 0;
     int check = 1;
 
-    FILE *fp = fopen("C:\\Users\\Mariam & Mayar\\Downloads\\accounts.txt", "r");
+    FILE *fp = fopen("accounts.txt", "r");
     if (!fp) {
         printf("Error: Cannot open file '%s'\n", filename);
         return;
