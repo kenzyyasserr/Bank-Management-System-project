@@ -8,14 +8,14 @@
 #define max_input 50
 
 //------------- sort by name --------------------------
-int compareByName(const void *a, const void *b) 
+int compareByName(const void *a, const void *b)
 {
     const account *acc1 = (const account *)a;
     const account *acc2 = (const account *)b;
     return strcmp(acc1->name, acc2->name);
 }
 
-void sortByName(account *acc, int n) 
+void sortByName(account *acc, int n)
 {
     qsort(acc, n, sizeof(account), compareByName);
 }
@@ -25,15 +25,15 @@ int compareByDate(const void *a, const void *b)
 {
     account *acc1 = (account *)a;
     account *acc2 = (account *)b;
-    
+
     // Compare year first
     if (acc1->open.year != acc2->open.year)
         return acc1->open.year - acc2->open.year;
-    
+
     // Then month
     if (acc1->open.month != acc2->open.month)
         return acc1->open.month - acc2->open.month;
-    
+
     // Then day
     return acc1->open.day - acc2->open.day;
 }
@@ -44,11 +44,11 @@ void sortByDate(account arr[], int n)
 }
 
 // ----------------- sort by balance ---------------------
-int compareByBalance(const void *a, const void *b) 
+int compareByBalance(const void *a, const void *b)
 {
     double bal1 = ((account *)a)->balance;
     double bal2 = ((account *)b)->balance;
-    
+
     if (bal1 < bal2) return -1;
     if (bal1 > bal2) return 1;
     return 0;
@@ -65,12 +65,12 @@ void printSorted(account arr[], const char *filename)
     int s, count = 0;
     int check = 1;
 
-    FILE *fp = fopen(filename, "r");
+    FILE *fp = fopen("C:\\Users\\Mariam & Mayar\\Downloads\\accounts.txt", "r");
     if (!fp) {
         printf("Error: Cannot open file '%s'\n", filename);
         return;
     }
-    
+
     // Read data from file
     while (fscanf(fp, "%10[^,],%99[^,],%99[^,],%f,%11[^,],%d-%d,%9[^\n]\n",    //read all characters until a comma is found and don't includde the comma
                   arr[count].accountNumber,
@@ -85,7 +85,7 @@ void printSorted(account arr[], const char *filename)
         // Set day to 1 as default since file doesn't have day
         arr[count].open.day = 1;
         count++;
-        
+
         if (count >= max_users) {
             printf("Warning: Reached maximum account limit of %d\n", max_users);
             break;
@@ -93,20 +93,20 @@ void printSorted(account arr[], const char *filename)
     }
 
     fclose(fp);
-    
+
     if (count == 0) {
         printf("No accounts found in file '%s'\n", filename);
         return;
     }
 
     printf("Loaded %d accounts from '%s'\n", count, filename);
-    
+
     printf("\nChoose sorting option:\n");
     printf("1: Sort by name\n");
     printf("2: Sort by date\n");
     printf("3: Sort by balance\n");
     printf("Enter a valid choice: ");
-    
+
     if (scanf("%d", &s) != 1) {
         printf("Invalid input!!!\n");
         return;
@@ -149,6 +149,8 @@ void printSorted(account arr[], const char *filename)
     }
 
     // Write sorted data
+
+
     for (int i = 0; i < count; i++) {
         fprintf(fp, "%s,%s,%s,%.f,%s,%02d-%04d,%s\n",
                 arr[i].accountNumber,
@@ -161,9 +163,15 @@ void printSorted(account arr[], const char *filename)
                 arr[i].status);
     }
 
+
     fclose(fp);
-    
+
     // display in terminal
+      const char *months[] =
+    {
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    };
     printf("\nSorted Accounts:\n");
     printf("====================\n");
     for (int i = 0; i < count; i++) {
@@ -173,19 +181,22 @@ void printSorted(account arr[], const char *filename)
         printf("  Email: %s\n", arr[i].email);
         printf("  Balance: %.2lf\n", arr[i].balance);
         printf("  Mobile: %s\n", arr[i].mobile);
-        printf("  Date Opened: %02d/%04d\n", arr[i].open.month, arr[i].open.year);
+        printf("  Date Opened: %s %d\n", months[arr[i].open.month - 1],arr[i].open.year);
         printf("  Status: %s\n", arr[i].status);
     }
-    
+    clean_stdin();
+
     printf("\nSorted data has been saved to 'accounts_sorted.txt'\n");
+
 }
+
 
 // ========================= Main function ==========================================
-int main()
-{
-    account accounts[max_users];
+//int main()
+//{
+  //  account accounts[max_users];
 
-    printSorted(accounts, "accounts.txt");
+    //printSorted(accounts, "accounts.txt");
     
-    return 0;
-}
+    //return 0;
+/}
