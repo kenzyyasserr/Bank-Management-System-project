@@ -11,7 +11,7 @@ void report()
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        printf("033[1;31mNo transactions found for account %s\033[0m\n", acc[idx].accountNumber);
+        printf("\033[1;31mNo transactions found for account %s\033[0m\n", acc[idx].accountNumber);
         return;
     }
 
