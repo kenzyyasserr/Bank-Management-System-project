@@ -40,7 +40,7 @@ void add_account(void)
     // account number
     while (1)
     {
-        printf("Enter new account number (10 digits): ");
+        printf("\033[1;33mEnter new account number\033[0m \033[1;34m10 digits: \033[0m");
         if (!fgets(newaccount, sizeof(newaccount), stdin))
             continue;
 
