@@ -17,12 +17,12 @@ void search_account()
         return;
     }
 
-    printf("Account Number: %s\n", acc[idx].accountNumber);
-    printf("Name          : %s\n", acc[idx].name);
-    printf("E-mail        : %s\n", acc[idx].email);
-    printf("Balance       : %.2f $\n", acc[idx].balance);
-    printf("Mobile        : %s\n", acc[idx].mobile);
-    printf("Date Opened   : %s %d\n",months[acc[idx].open.month - 1],acc[idx].open.year);
+    printf("\033[1;36mAccount Number:\033[0m %s\n", acc[idx].accountNumber);
+    printf("\033[1;36mName          : \033[0m%s\n", acc[idx].name);
+    printf("\033[1;36mE-mail        : \033[0m%s\n", acc[idx].email);
+    printf("\033[1;36mBalance       : \033[0m%.2f $\n", acc[idx].balance);
+    printf("\033[1;36mMobile        : \033[0m%s\n", acc[idx].mobile);
+    printf("\033[1;36mDate Opened   : \033[0m%s %d\n",months[acc[idx].open.month - 1],acc[idx].open.year);
 
     char status_print[20];
     strcpy(status_print, acc[idx].status);
@@ -32,7 +32,7 @@ void search_account()
 
     status_print[0] = toupper(status_print[0]);
 
-    printf("Status        : %s\n", status_print);
+    printf("\033[1;36mStatus        : \033[0m%s\n", status_print);
 
 
 
@@ -77,13 +77,13 @@ int get_account_index()
 
     do
     {
-        printf("Enter the account number: ");
+        printf("\033[1;34mEnter the account number: \033[0m");
         if (!fgets(accountNumber, sizeof(accountNumber), stdin)) continue;
         accountNumber[strcspn(accountNumber, "\n")] = '\0';
 
         if (strlen(accountNumber) == 0)
         {
-            printf("Input cannot be empty. Try again.\n");
+            printf("\033[1;31mInput cannot be empty. Try again.\033[0m\n");
             continue;
         }
 
@@ -97,7 +97,7 @@ int get_account_index()
         }
 
         if (index == -1)
-            printf("The account number is not found! Try again.\n");
+            printf("\033[1;31mThe account number is not found! Try again.\033[0m\n");
 
     }
     while (index == -1);
@@ -115,27 +115,27 @@ void modify()
 
     int found = get_account_index();
 
-    printf("\nCurrent data:\n");
-    printf("Name   : %s\n", acc[found].name);
-    printf("Mobile : %s\n", acc[found].mobile);
-    printf("E-mail : %s\n\n", acc[found].email);
+    printf("\n\033[1;34mCurrent data:\033[0m\n");
+    printf("\033[1;36mName   : \033[0m%s\n", acc[found].name);
+    printf("\033[1;36mMobile : \033[0m%s\n", acc[found].mobile);
+    printf("\033[1;36mE-mail : \033[0m%s\n\n", acc[found].email);
 
     while (1)
     {
-        printf("1. Name\n2. Mobile\n3. E-mail\nChoose an option or q to quit: ");
+        printf("\033[1;34m1. Name\n2. Mobile\n3. E-mail\033[0m\n\033[1;36mChoose an option or q to quit: \033[0m");
 
         if (!fgets(choice, sizeof(choice), stdin)) continue;
         choice[strcspn(choice, "\n")] = '\0';
 
         if (!strcmp(choice, "q") || !strcmp(choice, "Q"))
         {
-            printf("Exiting Modification.\n");
+            printf("\033[1;31mExiting Modification.\033[0m\n");
             break;
         }
 
         if (!strcmp(choice, "1"))
         {
-            printf("Enter new Name: ");
+            printf("\033[1;36mEnter new Name: \033[0m");
             if (fgets(newname, sizeof(newname), stdin))
             {
                 newname[strcspn(newname, "\n")] = '\0';
@@ -147,14 +147,14 @@ void modify()
                         newname[i] = tolower(newname[i]);
                 strcpy(acc[found].name, newname);
                 modified=1;
-                printf("Name updated successfully.\n");
+                printf("\033[1;32mName updated successfully.\033[0m\n");
             }
         }
         else if (!strcmp(choice, "2"))
         {
             while (1)
             {
-                printf("Enter new Mobile (11 digits): ");
+                printf("\033[1;36mEnter new Mobile\033[0m (\033[1;34m11 digits): \033[0m");
                 if (!fgets(newmobile, sizeof(newmobile), stdin)) continue;
                 newmobile[strcspn(newmobile, "\n")] = '\0';
 
@@ -164,13 +164,13 @@ void modify()
 
                 if (!valid)
                 {
-                    printf("Invalid mobile number! Must be exactly 11 digits.\n");
+                    printf("\033[1;31mInvalid mobile number! Must be exactly 11 digits.\033[0m\n");
                     continue;
                 }
 
                 strcpy(acc[found].mobile, newmobile);
                    modified=1;
-                printf("Mobile number updated successfully.\n");
+                printf("\033[1;32mMobile number updated successfully.\033[0m\n");
                 break;
             }
         }
@@ -178,31 +178,31 @@ void modify()
         {
             while (1)
             {
-                printf("Enter new Email: ");
+                printf("\033[1;36mEnter new Email: \033[0m");
                 if (!fgets(newemail, sizeof(newemail), stdin)) continue;
                 newemail[strcspn(newemail, "\n")] = '\0';
 
                 if (!emailvalidation(newemail))
                 {
-                    printf("Invalid email! Please enter a valid email (e.g., example@mail.com).\n");
+                    printf("\033[1;31mInvalid email!\033[0m Please enter a valid email (e.g., example@mail.com).\n");
                     continue;
                 }
 
                 strcpy(acc[found].email, newemail);
                    modified=1;
-                printf("Email updated successfully.\n");
+                printf("\033[1;32mEmail updated successfully.\033[0m\n");
                 break;
             }
         }
         else
         {
-            printf("Invalid choice! Please try again.\n");
+            printf("\033[1;31mInvalid choice!\033[0m Please try again.\n");
         }
 
-        printf("\nUpdated data:\n");
-        printf("Name   : %s\n", acc[found].name);
-        printf("Mobile : %s\n", acc[found].mobile);
-        printf("E-mail : %s\n\n", acc[found].email);
+        printf("\n\033[1;34mUpdated data:\033[0m\n");
+        printf("\033[1;36mName   : \033[0m%s\n", acc[found].name);
+        printf("\033[1;36mMobile : \033[0m%s\n", acc[found].mobile);
+        printf("\033[1;36mE-mail : \033[0m%s\n\n", acc[found].email);
     }
     if(modified)
         confirm_save();
@@ -222,14 +222,14 @@ void advanced_search()
     };
 
 
-    printf("Enter keyword to search in Name: ");
+    printf("\033[1;36mEnter keyword to search in Name: \033[0m");
     fgets(keyword,sizeof(keyword),stdin);
     keyword[strcspn(keyword, "\n")]='\0';
 
     for (int i = 0; keyword[i]; i++)
         keyword[i] = tolower(keyword[i]);  // lowercase keyword
 
-    printf("\nSearch Results:\n");
+    printf("\n\033[1;33mSearch Results:\033[0m\n");
     printf("----------------\n");
 
     for (int i = 0; i < accCounter; i++)
@@ -245,12 +245,12 @@ void advanced_search()
         {
             if (strstr(token, keyword) != NULL)
             {
-                printf("Account Number: %s\n", acc[i].accountNumber);
-                printf("Name          : %s\n", acc[i].name);
-                printf("E-mail        : %s\n", acc[i].email);
-                printf("Balance       : %.2f $\n", acc[i].balance);
-                printf("Mobile        : %s\n", acc[i].mobile);
-                printf("Date Opened   : %s %d\n",months[acc[i].open.month - 1],acc[i].open.year);
+                printf("\033[1;36mAccount Number: %s\n", acc[i].accountNumber);
+                printf("\033[1;36mName          : %s\n", acc[i].name);
+                printf("\033[1;36mE-mail        : %s\n", acc[i].email);
+                printf("\033[1;36mBalance       : %.2f $\n", acc[i].balance);
+                printf("\033[1;36mMobile        : %s\n", acc[i].mobile);
+                printf("\033[1;36mDate Opened   : \033[0m%s %d\n",months[acc[i].open.month - 1],acc[i].open.year);
                 char status_print[20];
                 strcpy(status_print, acc[i].status);
 
@@ -259,8 +259,8 @@ void advanced_search()
 
                 status_print[0] = toupper(status_print[0]);
 
-                printf("Status        : %s\n", status_print);
-                printf("----------------\n");
+                printf("\033[1;36mStatus        : \033[0m%s\n", status_print);
+                printf("\033[1;36m-------------------------------------------------------\033[0m\n");
                 foundit = 1;
                 break;
             }
@@ -269,5 +269,5 @@ void advanced_search()
     }
 
     if (!foundit)
-        printf("No matches are found.\n");
+        printf("\033[1;31mNo matches are found.\033[0m\n");
 }

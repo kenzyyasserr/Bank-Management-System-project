@@ -11,7 +11,7 @@ void report()
     FILE *file = fopen(filename, "r");
     if (!file)
     {
-        printf("No transactions found for account %s\n", acc[idx].accountNumber);
+        printf("033[1;31mNo transactions found for account %s\033[0m\n", acc[idx].accountNumber);
         return;
     }
 
@@ -23,7 +23,7 @@ void report()
 
     fclose(file);
 
-    printf("\nLast 5 transactions for account %s:\n", acc[idx].accountNumber);
+    printf("\n\033[1;34mLast 5 transactions for account %s:\033[0m\n", acc[idx].accountNumber);
     printf("-------------------------------------\n");
 
     int start;
@@ -51,7 +51,7 @@ void saveAcc()
     FILE *accounts=fopen("C:\\Users\\Mariam & Mayar\\Downloads\\accounts.txt", "w");
     if (accounts == NULL)
     {
-        printf("Error could not save.\n");
+        printf("\033[1;31mError could not save.\033[0m\n");
         return;
     }
 
@@ -70,10 +70,10 @@ void confirm_save()
 {
     char choice[10];
 
-    printf("\nDo you want to save changes?\n");
-    printf("1. Yes\n");
-    printf("2. No (Discard changes)\n");
-    printf("Choose: ");
+    printf("\n\033[1;33mDo you want to save changes?\033[0m\n");
+    printf("\033[1;37m1. Yes\033[0m\n");
+    printf("\033[1;37m2. No (Discard changes)\033[0m\n");
+    printf("\033[1;36mChoose: \033[0m");
 
     if (!fgets(choice, sizeof(choice), stdin))
         return;
@@ -83,11 +83,11 @@ void confirm_save()
     if (!strcmp(choice, "1") || !strcasecmp(choice, "YES"))
     {
         saveAcc();
-         printf("Changes saved successfully.\n");
+         printf("\033[1;32mChanges saved successfully.\033[0m\n");
     }
     else
     {
-        printf("Changes discarded.\n");
+        printf("\033[1;31mChanges discarded.\033[0m\n");
         load_accounts();
     }
 }

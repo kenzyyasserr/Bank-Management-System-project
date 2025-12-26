@@ -6,14 +6,13 @@ void load_users()
     FILE *users=fopen("users.txt", "r");
     if(users==NULL)
     {
-        printf("Error could not open users.txt\n");
+        printf("\033[1;31mError could not open users.txt\033[0m\n");  //printed in red
         exit(1);
     }
 
     usersCount=0;
     while (fscanf(users,"%49s %49s",usernames[usersCount],passwords[usersCount]) == 2)
     {
-        // printf("%s %s\n",usernames[usersCount],passwords[usersCount]);
         usersCount++;
     }
 
@@ -29,14 +28,14 @@ void login()
 
     while (!success)
     {
-        printf("Enter username : ");
+        printf("\033[1;34mEnter username : \033[0m");  //blue
 
 
 
         fgets(username, sizeof(username), stdin);
         username[strcspn(username, "\n")] = '\0';
 
-        printf("Enter password : ");
+        printf("\033[1;34mEnter password : \033[0m");  //blue
         fgets(password, sizeof(password), stdin);
         password[strcspn(password, "\n")] = '\0';
 
@@ -50,9 +49,9 @@ void login()
         }
 
         if(success)
-            printf("Login successful! Welcome %s.\n",username);
+            printf("\033[1;32mLogin successful! Welcome %s.\033[0m\n",username);  //green
 
         else
-            printf("Invalid username or password. Try again.\n");
+            printf("\033[1;31mInvalid username or password. Try again.\033[0m\n");  //red
     }
 }

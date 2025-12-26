@@ -21,36 +21,36 @@ void daily_limit(float *amount, int idx)
 
     while (1)
     {
-        printf("Enter withdrawal amount: ");
+        printf("\033[1;34mEnter withdrawal amount: \033[0m");
         if (scanf("%f", amount) != 1)
         {
             clean_stdin();
-            printf("Invalid input! Please enter a numeric value.\n");
+            printf("\033[1;31mInvalid input! Please enter a numeric value.\033[0m\n");
             continue;
         }
         clean_stdin();
 
         if (*amount <= 0)
         {
-            printf("Amount must be positive!\n");
+            printf("\033[1;31mAmount must be positive!\033[0m\n");
             continue;
         }
 
         if (*amount > MAX_TRANSACTION)
         {
-            printf("Transaction limit exceeded! Max per transaction is %.2f\n", MAX_TRANSACTION);
+            printf("\033[1;31mTransaction limit exceeded!\033[0m \033[1;37mMax per transaction is %.2f\033[0m\n", MAX_TRANSACTION);
             continue;
         }
 
         if (*amount + dailyTotal[idx] > MAX_DAILY)
         {
-            printf("Daily limit exceeded! You can withdraw up to %.2f more today.\n", MAX_DAILY - dailyTotal[idx]);
+            printf("\033[1;31mDaily limit exceeded!\033[0m \033[1;37mYou can withdraw up to %.2f more today.\033[0m\n", MAX_DAILY - dailyTotal[idx]);
             continue;
         }
 
         if (*amount > acc[idx].balance)
         {
-            printf("Insufficient balance! Current balance: %.2f\n", acc[idx].balance);
+            printf("\033[1;31mInsufficient balance!\033[0m \033[1;36mCurrent balance: %.2f\033[0m\n", acc[idx].balance);
             continue;
         }
 
@@ -67,7 +67,7 @@ void withdraw()
 
     if (strcasecmp(acc[idx].status, "ACTIVE") != 0)
     {
-        printf("Account is inactive! Cannot process withdrawal.\n");
+        printf("\033[1;31mAccount is inactive! Cannot process withdrawal.\033[0m\n");
         return;
     }
 
@@ -75,7 +75,7 @@ void withdraw()
     daily_limit(&amount, idx);
 
     acc[idx].balance -= amount;
-    printf("Withdrawal successful!\nAmount withdrawn: %.2f\n", amount);
+    printf("\033[1;32mWithdrawal successful!\033[0m\nAmount withdrawn: %.2f\n", amount);
     printf("Remaining balance: %.2f\n", acc[idx].balance);
 
     char transaction[MAX_BUFFER];
@@ -92,7 +92,7 @@ void deposit()
 
     if (strcasecmp(acc[idx].status, "ACTIVE") != 0)
     {
-        printf("Account is inactive! Cannot process deposit.\n");
+        printf("\033[1;31mAccount is inactive! Cannot process deposit.\033[0m\n");
         return;
     }
 
@@ -101,24 +101,24 @@ void deposit()
 
     while (1)
     {
-        printf("Enter deposit amount: ");
+        printf("\033[1;36mEnter deposit amount: \033[0m");
         if (scanf("%f", &amount) != 1)
         {
             clean_stdin();
-            printf("Invalid input! Please enter a numeric value.\n");
+            printf("\033[1;31mInvalid input! Please enter a numeric value.\033[0m\n");
             continue;
         }
         clean_stdin();
 
         if (amount <= 0)
         {
-            printf("Amount must be positive!\n");
+            printf("\033[1;31mAmount must be positive!\033[0m\n");
             continue;
         }
 
         if (amount > MAX_DEPOSIT)
         {
-            printf("Transaction limit exceeded! Max deposit per transaction is %.2f\n", MAX_DEPOSIT);
+            printf("\033[1;31mTransaction limit exceeded!\033[0m \033[1;37mMax deposit per transaction is %.2f\033[0m\n", MAX_DEPOSIT);
             continue;
         }
 
@@ -126,7 +126,7 @@ void deposit()
     }
 
     acc[idx].balance += amount;
-    printf("Deposit successful! Amount deposited: %.2f\n", amount);
+    printf("\033[1;32mDeposit successful!\033[0m \033[1;37mAmount deposited: %.2f\033[0m\n", amount);
     printf("New balance: %.2f\n", acc[idx].balance);
 
     char transaction[MAX_BUFFER];
@@ -145,7 +145,7 @@ void transfer()
 
     if (strcasecmp(acc[senderIdx].status, "ACTIVE") != 0)
     {
-        printf("Sender account is inactive! Cannot process transfer.\n");
+        printf("\033[1;31mSender account is inactive! Cannot process transfer.\033[0m\n");
         return;
     }
 
@@ -155,7 +155,7 @@ void transfer()
 
     if (strcasecmp(acc[receiverIdx].status, "ACTIVE") != 0)
     {
-        printf("Receiver account is inactive! Cannot process transfer.\n");
+        printf("\033[1;31mReceiver account is inactive! Cannot process transfer.\033[0m\n");
         return;
     }
 
@@ -164,30 +164,30 @@ void transfer()
 
     while (1)
     {
-        printf("Enter transfer amount: ");
+        printf("\033[1;36mEnter transfer amount: \033[0m");
         if (scanf("%f", &amount) != 1)
         {
             clean_stdin();
-            printf("Invalid input! Please enter a numeric value.\n");
+            printf("\033[1;31mInvalid input! Please enter a numeric value.\033[0m\n");
             continue;
         }
         clean_stdin();
 
         if (amount <= 0)
         {
-            printf("Amount must be positive!\n");
+            printf("\033[1;31mAmount must be positive!\033[0m\n");
             continue;
         }
 
         if (amount > MAX_TRANSFER)
         {
-            printf("Transaction limit exceeded! Max transfer per transaction is %.2f\n", MAX_TRANSFER);
+            printf("\033[1;31mTransaction limit exceeded! Max transfer per transaction is %.2f\033[0m\n", MAX_TRANSFER);
             continue;
         }
 
         if (amount > acc[senderIdx].balance)
         {
-            printf("Insufficient balance in sender account! Current balance: %.2f\n", acc[senderIdx].balance);
+            printf("\033[1;31mInsufficient balance in sender account! Current balance: %.2f\033[0m\n", acc[senderIdx].balance);
             continue;
         }
 
@@ -197,9 +197,9 @@ void transfer()
     acc[senderIdx].balance -= amount;
     acc[receiverIdx].balance += amount;
 
-    printf("Transfer successful!\n");
-    printf("Sender new balance: %.2f\n", acc[senderIdx].balance);
-    printf("Receiver new balance: %.2f\n", acc[receiverIdx].balance);
+    printf("\033[1;32mTransfer successful!\033[0m\n");
+    printf("\033[1;33mSender new balance: %.2f\033[0m\n", acc[senderIdx].balance);
+    printf("\033[1;33mReceiver new balance: %.2f\033[0m\n", acc[receiverIdx].balance);
 
     char transaction[MAX_BUFFER];
     sprintf(transaction, "TRANSFER OUT: %.2f to %s", amount, acc[receiverIdx].accountNumber);
@@ -219,7 +219,7 @@ void append_transaction(const char *accNumber, const char *transaction)
     FILE *file = fopen(filename, "a");
     if (!file)
     {
-        printf("Error opening transaction file for account %s\n", accNumber);
+        printf("\033[1;31mError opening transaction file for account %s\033[0m\n", accNumber);
         return;
     }
 

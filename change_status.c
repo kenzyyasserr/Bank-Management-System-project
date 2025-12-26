@@ -6,10 +6,10 @@ void change_status()
     if (idx==-1) return;
     int modified=0;
 
-    printf("\nCurrent status: %s\n", acc[idx].status);
-    printf("1. ACTIVE\n");
-    printf("2. INACTIVE\n");
-    printf("Choose new status: ");
+    printf("\n\033[1;36mCurrent status: \033[0m%s\n", acc[idx].status);
+    printf("\033[1;34m1. ACTIVE\033[0m\n");
+    printf("\033[1;34m2. INACTIVE\033[0m\n");
+    printf("\033[1;37mChoose new status: \033[0m");
 
     char choice[10];
     if (!fgets(choice, sizeof(choice), stdin))
@@ -20,11 +20,11 @@ void change_status()
     if (!strcmp(choice, "1") || !strcasecmp(choice, "ACTIVE"))
     {
         if(!strcasecmp(acc[idx].status,"Active"))
-            printf("Account is already Active.\n");
+            printf("\033[1;31mAccount is already Active.\033[0m\n");
         else
         {
             strcpy(acc[idx].status, "active");
-            printf("Status changed to ACTIVE successfully.\n");
+            printf("\033[1;32mStatus changed to ACTIVE successfully.\033[0m\n");
             modified=1;
         }
     }
@@ -32,18 +32,18 @@ void change_status()
     {
 
         if(!strcasecmp(acc[idx].status,"Inactive"))
-            printf("Account is already Inactive.\n");
+            printf("\033[1;31mAccount is already Inactive.\033[0m\n");
 
         else
         {
             strcpy(acc[idx].status, "inactive");
-            printf("Status changed to INACTIVE successfully.\n");
+            printf("\033[1;32mStatus changed to INACTIVE successfully.\033[0m\n");
             modified=1;
         }
     }
     else
     {
-        printf("Invalid choice! Status not changed.\n");
+        printf("\033[1;31mInvalid choice!\033[0m \033[1;37mStatus not changed.\033[0m\n");
     }
     if(modified)
         confirm_save();

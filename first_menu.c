@@ -3,7 +3,7 @@
 // ------------------------ Quit program ------------------------
 void quit()
 {
-    printf("Exiting program.\nGoodbye!\n");
+    printf("\033[1;31mExiting program.\033[0m\n\033[1;33mGoodbye!\033[0m\n");  //red then yellow
     exit(0);
 }
 
@@ -13,17 +13,17 @@ void first_menu()
     char choice[10];
     while(1)
     {
-        printf("\n--- MENU ---\n");
-        printf("1-LOGIN\n");
-        printf("2-QUIT\n");
-        printf("Choose an option: ");
+        printf("\n\033[1;35m--- MENU ---\033[0m\n");   //magenta
+        printf("\033[1;36m1-LOGIN\033[0m\n");   //cyan
+        printf("\033[1;36m2-QUIT\033[0m\n");    //cyan
+        printf("\033[1;37mChoose an option: \033[0m");           //white
 
         if (!fgets(choice, sizeof(choice), stdin)) continue;
         choice[strcspn(choice, "\n")] = '\0';
 
         if (!strcmp(choice,"1") || !strcasecmp(choice,"LOGIN"))
         {
-            printf("You chose LOGIN.\n");
+            printf("\033[1;32mYou chose LOGIN.\033[0m\n");     //green
             login();
             main_menu();
         }
@@ -40,7 +40,7 @@ void load_accounts()
     FILE *accounts=fopen("accounts.txt","r");
     if(accounts==NULL)
     {
-        printf("Error could not open account.txt\n");
+        printf("\033[1;31mError could not open account.txt\033[0m\n");   //red
         exit(1);
     }
 

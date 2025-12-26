@@ -94,14 +94,14 @@ void printSorted(account arr[], const char *filename)
 
     printf("Loaded %d accounts from '%s'\n", count, filename);
 
-    printf("\nChoose sorting option:\n");
-    printf("1: Sort by name\n");
-    printf("2: Sort by date\n");
-    printf("3: Sort by balance\n");
-    printf("Enter a valid choice: ");
+    printf("\n\033[1;34mChoose sorting option:\033[0m\n");
+    printf("\033[1;36m1: Sort by name\033[0m\n");
+    printf("\033[1;36m2: Sort by date\033[0m\n");
+    printf("\033[1;36m3: Sort by balance\033[0m\n");
+    printf("\033[1;33mEnter a valid choice: \033[0m");
 
     if (scanf("%d", &s) != 1) {
-        printf("Invalid input!!!\n");
+        printf("\033[1;31mInvalid input!!!\033[0m\n");
         return;
     }
 
@@ -109,26 +109,26 @@ void printSorted(account arr[], const char *filename)
         switch (s) {
             case 1:
                 sortByName(arr, count);
-                printf("Sorted by name.\n");
+                printf("\033[1;33mSorted by name.\033[0m\n");
                 check = 0;
                 break;
 
             case 2:
                 sortByDate(arr, count);
-                printf("Sorted by date.\n");
+                printf("\033[1;33mSorted by date.\033[0m\n");
                 check = 0;
                 break;
 
             case 3:
                 sortByBalance(arr, count);
-                printf("Sorted by balance.\n");
+                printf("\033[1;33mSorted by balance.\033[0m\n");
                 check = 0;
                 break;
 
             default:
-                printf("INVALID OPTION! Please enter 1, 2 or 3: ");
+                printf("\033[1;31mINVALID OPTION!\033[0m Please enter 1, 2 or 3: ");
                 if (scanf("%d", &s) != 1) {
-                    printf("Invalid input!\n");
+                    printf("\033[1;31mInvalid input!\033[0m\n");
                     return;
                 }
         }
@@ -137,7 +137,7 @@ void printSorted(account arr[], const char *filename)
     // Save sorted data to "accounts_sorted"
     fp = fopen("accounts_sorted.txt", "w");
     if (!fp) {
-        printf("Error: Cannot create file 'accounts_sorted.txt'\n");
+        printf("\033[1;31mError: Cannot create file 'accounts_sorted.txt'\033[0m\n");
         return;
     }
 
@@ -165,8 +165,8 @@ void printSorted(account arr[], const char *filename)
         "January", "February", "March", "April", "May", "June",
         "July", "August", "September", "October", "November", "December"
     };
-    printf("\nSorted Accounts:\n");
-    printf("====================\n");
+    printf("\n\033[1;34mSorted Accounts:\n");
+    printf("\033[1;33m=======================================================\033[0m\n");
     for (int i = 0; i < count; i++) {
         printf("\nAccount %d/%d:\n", i+1, count);
         printf("  Account Number: %s\n", arr[i].accountNumber);
@@ -179,6 +179,6 @@ void printSorted(account arr[], const char *filename)
     }
     clean_stdin();
 
-    printf("\nSorted data has been saved to 'accounts_sorted.txt'\n");
+    printf("\n\033[1;32mSorted data has been saved to 'accounts_sorted.txt'\033[0m\n");
 
 }

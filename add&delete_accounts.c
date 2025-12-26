@@ -48,15 +48,15 @@ void add_account(void)
 
         if (strlen(newaccount) != 10)
         {
-            printf("Account number must be exactly 10 digits!\n");
+            printf("\033[1;37mAccount number must be exactly\033[0m \033[1;34m10 digits!\033[0m\n");
             continue;
         }
 
         if (!digit(newaccount))
-            printf("Invalid input. Digits only!\n");
+            printf("\033[1;31mInvalid input. Digits only!\033[0m\n");
         else if (accountexist(newaccount))
         {
-            printf("Duplicate account number!\n");
+            printf("\033[1;34mDuplicate\033[0m \033[1;37maccount number!\033[0m\n");
             clean_stdin();
         }
         else
@@ -70,7 +70,7 @@ void add_account(void)
     do
     {
         valid = 1;
-        printf("Enter new Name: ");
+        printf("\033[1;37mEnter new Name: \033[0m");
         if (!fgets(addname, sizeof(addname), stdin))
             continue;
 
@@ -85,7 +85,7 @@ void add_account(void)
                 valid = 0;
 
         if (!valid)
-            printf("Invalid name. Try again.\n");
+            printf("\033[1;31mInvalid name.\033[0m \033[1;37mTry again.\033[0m\n");
 
     }
     while (!valid);
@@ -112,7 +112,7 @@ void add_account(void)
 
         if (!emailvalidation(addemail))
         {
-            printf("Invalid email format! Please try again.\n");
+            printf("\033[1;31mInvalid email format! Please try again.\033[0m\n");
             continue;
         }
         break;
@@ -123,7 +123,7 @@ void add_account(void)
     do
     {
         valid = 1;
-        printf("Enter new Mobile Number (11 digits): ");
+        printf("\033[1;37mEnter new Mobile Number\033[0m \033[1;34m11 digits: \033[0m");
         if (!fgets(addmobile, sizeof(addmobile), stdin))
             continue;
 
@@ -137,7 +137,7 @@ void add_account(void)
                 valid = 0;
 
         if (!valid)
-            printf("Invalid mobile number. Must be 11 digits\n");
+            printf("\033[1;31mInvalid mobile number.\033[0m \033[1;37mMust be 11 digits\033[0m\n");
 
     }
     while (!valid);
@@ -160,8 +160,8 @@ void add_account(void)
     acc[accCounter].open.year = tm.tm_year + 1900;
     accCounter++;
 
-    printf("\nAccount added successfully \n");
-    printf("Creation date & time: %02d/%02d/%04d %02d:%02d:%02d\n",
+    printf("\n\033[1;32mAccount added successfully\033[0m\n");
+    printf("\033[1;37mCreation date & time:\033[0m %02d/%02d/%04d %02d:%02d:%02d\n",
            tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900,
            tm.tm_hour, tm.tm_min, tm.tm_sec);
 
@@ -180,7 +180,7 @@ void delete_account()
 
     if (acc[idx].balance != 0)
     {
-        printf("Cannot delete account. Balance must be zero.\n");
+        printf("\033[1;31mCannot\033[0m \033[1;37mdelete account. Balance must be zero.\033[0m\n");
         return;
     }
 
@@ -191,6 +191,6 @@ void delete_account()
 
     accCounter--;
 
-    printf("Account deleted successfully.\n");
+    printf("\033[1;32mAccount deleted successfully.\033[0m\n");
     confirm_save();
 }
