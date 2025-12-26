@@ -35,8 +35,45 @@ int usersCount=0;
 int accCounter=0;
 
 // ==================== Functions' prototypes ========================
-void first_menu();
-void quit();
+void load_users();
 void login();
+void quit();
 void first_menu();
+void load_accounts();
 void main_menu();
+void clean_stdin();
+int digit(const char*s);
+int accountexist(const char *newaccount);
+void add_account();
+void delete_account();
+void search_account();
+int emailvalidation(const char email[]);
+int get_account_index();
+void modify();
+void advanced_search();
+void change_status();
+void daily_limit(float *amount, int idx);
+void withdraw();
+void deposit();
+void transfer();
+void append_transaction(const char *accNumber, const char *transaction);
+void report();
+void saveAcc();
+void confirm_save();
+int compareByName(const void *a, const void *b);
+void sortByName(account *acc, int n);
+int compareByDate(const void *a, const void *b);
+void sortByDate(account arr[], int n);
+int compareByBalance(const void *a, const void *b);
+void sortByBalance(account arr[], int n);
+void printSorted(account arr[], const char *filename);
+
+
+int main()
+{
+    load_users();
+    load_accounts();
+    first_menu();
+
+    return 0;
+}
