@@ -58,9 +58,9 @@ void printSorted(account arr[], const char *filename)
     int s, count = 0;
     int check = 1;
 
-    FILE *fp = fopen("C:\\Users\\Mariam & Mayar\\Downloads\\accounts.txt", "r");
+    FILE *fp = fopen("accounts.txt", "r");
     if (!fp) {
-        printf("Error: Cannot open file '%s'\n", filename);
+        printf("\033[1;31mError: Cannot open file '%s'\033[0m\n", filename);
         return;
     }
 
@@ -80,7 +80,7 @@ void printSorted(account arr[], const char *filename)
         count++;
 
         if (count >= max_users) {
-            printf("Warning: Reached maximum account limit of %d\n", max_users);
+            printf("\033[1;31mWarning: Reached maximum account limit of %d\033[0m\n", max_users);
             break;
         }
     }
@@ -88,7 +88,7 @@ void printSorted(account arr[], const char *filename)
     fclose(fp);
 
     if (count == 0) {
-        printf("No accounts found in file '%s'\n", filename);
+        printf("\033[1;31mNo accounts found in file '%s'\033[0m\n", filename);
         return;
     }
 

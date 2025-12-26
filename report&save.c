@@ -24,7 +24,7 @@ void report()
     fclose(file);
 
     printf("\n\033[1;34mLast 5 transactions for account %s:\033[0m\n", acc[idx].accountNumber);
-    printf("-------------------------------------\n");
+    printf("\n\033[1;33m---------------------------------------------------------------\033[0m\n");
 
     int start;
     if (count > 5)
