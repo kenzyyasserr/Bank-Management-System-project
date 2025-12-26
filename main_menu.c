@@ -7,7 +7,7 @@ void main_menu()
 
     while(1)
     {
-        printf("\n\033[1;34m--- MAIN MENU ---\033[0m\n");   //blue
+        printf("\n\033[1;34m-------------------- MAIN MENU --------------------\033[0m\n");   //blue
         //in cyan
         printf("\033[1;36m1-ADD\033[0m\n");
         printf("\033[1;36m2-DELETE\033[0m\n");
