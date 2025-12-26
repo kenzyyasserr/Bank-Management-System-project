@@ -67,13 +67,3 @@ void sortByDate(account arr[], int n);
 int compareByBalance(const void *a, const void *b);
 void sortByBalance(account arr[], int n);
 void printSorted(account arr[], const char *filename);
-
-
-int main()
-{
-    load_users();
-    load_accounts();
-    first_menu();
-
-    return 0;
-}
