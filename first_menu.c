@@ -57,12 +57,11 @@ void load_accounts()
         &acc[accCounter].open.year,
         acc[accCounter].status) == 8)
     {
-        /* إزالة المسافات */
         char *p = acc[accCounter].status;
         while (*p == ' ') p++;
        strcpy(acc[accCounter].status,p);
-        /* إزالة newline */
-        acc[accCounter].status[strcspn(acc[accCounter].status, "\r\n")] = '\0';
+
+       acc[accCounter].status[strcspn(acc[accCounter].status, "\r\n")] = '\0';
 
         accCounter++;
     }
