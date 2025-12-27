@@ -48,7 +48,7 @@ void report()
 void saveAcc()
 {
 
-    FILE *accounts=fopen("C:\\Users\\Mariam & Mayar\\Downloads\\accounts.txt", "w");
+    FILE *accounts=fopen("accounts.txt", "w");
     if (accounts == NULL)
     {
         printf("\033[1;31mError could not save.\033[0m\n");

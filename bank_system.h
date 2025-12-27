@@ -36,6 +36,7 @@ extern int accCounter;
 
 
 // ==================== Functions' prototypes ========================
+void clear();
 void load_users();
 void login();
 void quit();
