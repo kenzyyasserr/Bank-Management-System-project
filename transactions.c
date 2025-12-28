@@ -160,7 +160,7 @@ void transfer()
         return;
     }
 
-    printf("RECEIVER --->\n");
+    printf("RECEIVER <---\n");
     int receiverIdx = get_account_index();
     if (receiverIdx == -1) return;
 
