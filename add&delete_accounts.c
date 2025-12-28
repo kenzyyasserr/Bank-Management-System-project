@@ -30,10 +30,10 @@ int accountexist(const char *newaccount)
 // --------------------------- function--------------------------------------------
 void add_account(void)
 {
-    char newaccount[11];
+    char newaccount[50];
     char addname[100];
     char addemail[100];
-    char addmobile[12];
+    char addmobile[50];
     int valid;
 
 
@@ -41,29 +41,34 @@ void add_account(void)
     while (1)
     {
         printf("\033[1;33mEnter new account number\033[0m \033[1;34m10 digits: \033[0m");
-        if (!fgets(newaccount, sizeof(newaccount), stdin))
+        if (!fgets(newaccount, sizeof(newaccount), stdin)){
+            // clean_stdin();
             continue;
+        }
 
         newaccount[strcspn(newaccount, "\n")] = '\0';
 
         if (strlen(newaccount) != 10)
         {
+            // clean_stdin();
             printf("\033[1;37mAccount number must be exactly\033[0m \033[1;34m10 digits!\033[0m\n");
             continue;
         }
 
-        if (!digit(newaccount))
+        if (!digit(newaccount)){
+            // clean_stdin();
             printf("\033[1;31mInvalid input. Digits only!\033[0m\n");
+        }
         else if (accountexist(newaccount))
         {
             printf("\033[1;34mDuplicate\033[0m \033[1;37maccount number!\033[0m\n");
-            clean_stdin();
+            // clean_stdin();
         }
         else
             break;
     }
 
-    clean_stdin();
+    // clean_stdin();
 
 
     // Name
@@ -124,8 +129,11 @@ void add_account(void)
     {
         valid = 1;
         printf("\033[1;37mEnter new Mobile Number\033[0m \033[1;34m11 digits: \033[0m");
-        if (!fgets(addmobile, sizeof(addmobile), stdin))
+        
+        if (!fgets(addmobile, sizeof(addmobile), stdin)){
+            // clean_stdin();
             continue;
+        }
 
         addmobile[strcspn(addmobile, "\n")] = '\0';
 
@@ -136,9 +144,10 @@ void add_account(void)
             if (!isdigit((unsigned char)addmobile[i]))
                 valid = 0;
 
-        if (!valid)
+        if (!valid){
+            // clean_stdin();
             printf("\033[1;31mInvalid mobile number.\033[0m \033[1;37mMust be 11 digits\033[0m\n");
-
+        }
     }
     while (!valid);
 
@@ -165,7 +174,7 @@ void add_account(void)
            tm.tm_mday, tm.tm_mon + 1, tm.tm_year + 1900,
            tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-    clean_stdin();
+    // clean_stdin();
     confirm_save();
 }
 
@@ -193,4 +202,109 @@ void delete_account()
 
     printf("\033[1;32mAccount deleted successfully.\033[0m\n");
     confirm_save();
+}
+
+
+// ===================================== MOdify ===============================
+void modify()
+{
+    char newname[max_input];
+    char newmobile[50];
+    char newemail[2 * max_input];
+    char choice[20];
+    int modified=0;
+
+    int found = get_account_index();
+
+    printf("\n\033[1;34mCurrent data:\033[0m\n");
+    printf("\033[1;36mName   : \033[0m%s\n", acc[found].name);
+    printf("\033[1;36mMobile : \033[0m%s\n", acc[found].mobile);
+    printf("\033[1;36mE-mail : \033[0m%s\n\n", acc[found].email);
+
+    while (1)
+    {
+        printf("\033[1;34m1. Name\n2. Mobile\n3. E-mail\033[0m\n\033[1;36mChoose an option or q to quit: \033[0m");
+
+        if (!fgets(choice, sizeof(choice), stdin)) continue;
+        choice[strcspn(choice, "\n")] = '\0';
+
+        if (!strcmp(choice, "q") || !strcmp(choice, "Q"))
+        {
+            printf("\033[1;31mExiting Modification.\033[0m\n");
+            break;
+        }
+
+        if (!strcmp(choice, "1"))
+        {
+            printf("\033[1;36mEnter new Name: \033[0m");
+            if (fgets(newname, sizeof(newname), stdin))
+            {
+                newname[strcspn(newname, "\n")] = '\0';
+
+                for (int i = 0; newname[i]; i++)
+                    if (i == 0 || newname[i - 1] == ' ')
+                        newname[i] = toupper(newname[i]);
+                    else
+                        newname[i] = tolower(newname[i]);
+                strcpy(acc[found].name, newname);
+                modified=1;
+                printf("\033[1;32mName updated successfully.\033[0m\n");
+            }
+        }
+        else if (!strcmp(choice, "2"))
+        {
+            while (1)
+            {
+                printf("\033[1;36mEnter new Mobile\033[0m (\033[1;34m11 digits): \033[0m");
+                if (!fgets(newmobile, sizeof(newmobile), stdin)) continue;
+                newmobile[strcspn(newmobile, "\n")] = '\0';
+
+                int valid = strlen(newmobile) == 11;
+                for (int i = 0; newmobile[i] && valid; i++)
+                    if (!isdigit((unsigned char)newmobile[i])) valid = 0;
+
+                if (!valid)
+                {
+                    printf("\033[1;31mInvalid mobile number! Must be exactly 11 digits.\033[0m\n");
+                    continue;
+                }
+
+                strcpy(acc[found].mobile, newmobile);
+                   modified=1;
+                printf("\033[1;32mMobile number updated successfully.\033[0m\n");
+                break;
+            }
+        }
+        else if (!strcmp(choice, "3"))
+        {
+            while (1)
+            {
+                printf("\033[1;36mEnter new Email: \033[0m");
+                if (!fgets(newemail, sizeof(newemail), stdin)) continue;
+                newemail[strcspn(newemail, "\n")] = '\0';
+
+                if (!emailvalidation(newemail))
+                {
+                    printf("\033[1;31mInvalid email!\033[0m Please enter a valid email (e.g., example@mail.com).\n");
+                    continue;
+                }
+
+                strcpy(acc[found].email, newemail);
+                   modified=1;
+                printf("\033[1;32mEmail updated successfully.\033[0m\n");
+                break;
+            }
+        }
+        else
+        {
+            printf("\033[1;31mInvalid choice!\033[0m Please try again.\n");
+        }
+
+        printf("\n\033[1;34mUpdated data:\033[0m\n");
+        printf("\033[1;36mName   : \033[0m%s\n", acc[found].name);
+        printf("\033[1;36mMobile : \033[0m%s\n", acc[found].mobile);
+        printf("\033[1;36mE-mail : \033[0m%s\n\n", acc[found].email);
+    }
+    if(modified)
+        confirm_save();
 }

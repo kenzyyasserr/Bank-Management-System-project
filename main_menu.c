@@ -20,7 +20,8 @@ void main_menu()
         printf("\033[1;36m9-TRANSFER\033[0m\n");
         printf("\033[1;36m10-REPORT\033[0m\n");
         printf("\033[1;36m11-PRINT\033[0m\n");
-        printf("\033[1;36m12-QUIT\033[0m\n");
+        printf("\033[1;36m12-DELETE MULTIPLE\033[0m\n");
+        printf("\033[1;36m13-QUIT\033[0m\n");
         printf("\033[1;37mChoose one of the previous commands: \033[0m");  //white
 
         if (!fgets(choose, sizeof(choose), stdin))
@@ -81,9 +82,13 @@ void main_menu()
         else if (!strcmp(choose,"11") || !strcasecmp(choose,"PRINT"))
         {
             printf("\033[1;37mYou chose\033[0m \033[1;32mPRINT\033[0m\n");
-        printSorted(acc, "accounts.txt");
+            printSorted(acc, "accounts.txt");
         }
-        else if (!strcmp(choose,"12") || !strcasecmp(choose,"QUIT"))
+        else if (!strcmp(choose,"12") || !strcasecmp(choose,"DELETE MULTIPLE"))
+        {
+            delete_multiple_menu();
+        }
+        else if (!strcmp(choose,"13") || !strcasecmp(choose,"QUIT"))
         {
             quit();
         }
@@ -91,19 +96,27 @@ void main_menu()
         {
             char opt[10];
 
-            printf("\033[1;31mInvalid choice!\033[0m\n");   //red
-            printf("\033[1;34m1. Back to Main Menu\033[0m\n");   //blue
-            printf("\033[1;34m2. Exit Program\033[0m\n");    //blue
-            printf("\033[1;37mChoose an option: \033[0m");  //white
+            while(1)
+
+            {printf("\033[1;31mInvalid choice!\033[0m\n");
+            printf("\033[1;34m1. Back to Main Menu\033[0m\n");
+            printf("\033[1;34m2. Exit Program\033[0m\n");
+            printf("\033[1;34mChoose an option: \033[0m");
+
 
             if (!fgets(opt, sizeof(opt), stdin))
                 continue;
 
             opt[strcspn(opt, "\n")] = '\0';
+             if (!strcmp(opt, "1") || !strcasecmp(opt, "Back to Main Menu"))
+             {
+                 break;
+             }
 
-            if (!strcmp(opt, "2") || !strcasecmp(opt, "EXIT"))
+            else if (!strcmp(opt, "2") || !strcasecmp(opt, "EXIT"))
             {
                 quit();
+            }
             }
         }
     }

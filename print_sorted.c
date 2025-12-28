@@ -92,7 +92,7 @@ void printSorted(account arr[], const char *filename)
         return;
     }
 
-    printf("Loaded %d accounts from '%s'\n", count, filename);
+    printf("\033[1;32mLoaded %d accounts from '%s'\033[0m\n", count, filename);
 
     printf("\n\033[1;34mChoose sorting option:\033[0m\n");
     printf("\033[1;36m1: Sort by name\033[0m\n");

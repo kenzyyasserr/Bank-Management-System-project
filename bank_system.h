@@ -69,3 +69,7 @@ void sortByDate(account arr[], int n);
 int compareByBalance(const void *a, const void *b);
 void sortByBalance(account arr[], int n);
 void printSorted(account arr[], const char *filename);
+void delete_multiple_menu();
+void delete_exact_date();
+void delete_by_month_year();
+void delete_multiple(int option);

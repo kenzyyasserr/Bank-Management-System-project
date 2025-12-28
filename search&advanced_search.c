@@ -36,7 +36,7 @@ void search_account()
 
 
 
-    clean_stdin();
+    // clean_stdin();
 }
 
 int emailvalidation(const char email[])
@@ -104,111 +104,6 @@ int get_account_index()
 
     return index;
 }
-
-void modify()
-{
-    char newname[max_input];
-    char newmobile[14];
-    char newemail[2 * max_input];
-    char choice[20];
-    int modified=0;
-
-    int found = get_account_index();
-
-    printf("\n\033[1;34mCurrent data:\033[0m\n");
-    printf("\033[1;36mName   : \033[0m%s\n", acc[found].name);
-    printf("\033[1;36mMobile : \033[0m%s\n", acc[found].mobile);
-    printf("\033[1;36mE-mail : \033[0m%s\n\n", acc[found].email);
-
-    while (1)
-    {
-        printf("\033[1;34m1. Name\n2. Mobile\n3. E-mail\033[0m\n\033[1;36mChoose an option or q to quit: \033[0m");
-
-        if (!fgets(choice, sizeof(choice), stdin)) continue;
-        choice[strcspn(choice, "\n")] = '\0';
-
-        if (!strcmp(choice, "q") || !strcmp(choice, "Q"))
-        {
-            printf("\033[1;31mExiting Modification.\033[0m\n");
-            break;
-        }
-
-        if (!strcmp(choice, "1"))
-        {
-            printf("\033[1;36mEnter new Name: \033[0m");
-            if (fgets(newname, sizeof(newname), stdin))
-            {
-                newname[strcspn(newname, "\n")] = '\0';
-
-                for (int i = 0; newname[i]; i++)
-                    if (i == 0 || newname[i - 1] == ' ')
-                        newname[i] = toupper(newname[i]);
-                    else
-                        newname[i] = tolower(newname[i]);
-                strcpy(acc[found].name, newname);
-                modified=1;
-                printf("\033[1;32mName updated successfully.\033[0m\n");
-            }
-        }
-        else if (!strcmp(choice, "2"))
-        {
-            while (1)
-            {
-                printf("\033[1;36mEnter new Mobile\033[0m (\033[1;34m11 digits): \033[0m");
-                if (!fgets(newmobile, sizeof(newmobile), stdin)) continue;
-                newmobile[strcspn(newmobile, "\n")] = '\0';
-
-                int valid = strlen(newmobile) == 11;
-                for (int i = 0; newmobile[i] && valid; i++)
-                    if (!isdigit((unsigned char)newmobile[i])) valid = 0;
-
-                if (!valid)
-                {
-                    printf("\033[1;31mInvalid mobile number! Must be exactly 11 digits.\033[0m\n");
-                    continue;
-                }
-
-                strcpy(acc[found].mobile, newmobile);
-                   modified=1;
-                printf("\033[1;32mMobile number updated successfully.\033[0m\n");
-                break;
-            }
-        }
-        else if (!strcmp(choice, "3"))
-        {
-            while (1)
-            {
-                printf("\033[1;36mEnter new Email: \033[0m");
-                if (!fgets(newemail, sizeof(newemail), stdin)) continue;
-                newemail[strcspn(newemail, "\n")] = '\0';
-
-                if (!emailvalidation(newemail))
-                {
-                    printf("\033[1;31mInvalid email!\033[0m Please enter a valid email (e.g., example@mail.com).\n");
-                    continue;
-                }
-
-                strcpy(acc[found].email, newemail);
-                   modified=1;
-                printf("\033[1;32mEmail updated successfully.\033[0m\n");
-                break;
-            }
-        }
-        else
-        {
-            printf("\033[1;31mInvalid choice!\033[0m Please try again.\n");
-        }
-
-        printf("\n\033[1;34mUpdated data:\033[0m\n");
-        printf("\033[1;36mName   : \033[0m%s\n", acc[found].name);
-        printf("\033[1;36mMobile : \033[0m%s\n", acc[found].mobile);
-        printf("\033[1;36mE-mail : \033[0m%s\n\n", acc[found].email);
-    }
-    if(modified)
-        confirm_save();
-}
-
-
 
 // ================================= Advanced search ==============================================
 void advanced_search()

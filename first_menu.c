@@ -37,34 +37,31 @@ void first_menu()
 // --------------------------- Load accounts after login -------------------------
 void load_accounts()
 {
-    FILE *accounts = fopen("accounts.txt","r");
-    if (!accounts)
+    FILE *accounts=fopen("accounts.txt","r");
+    if(accounts==NULL)
     {
-        printf("Error could not open accounts.txt\n");
+        printf("Error could not open account.txt\n");
         exit(1);
     }
 
-    accCounter = 0;
 
-    while (fscanf(accounts,
-        "%10[^,],%99[^,],%99[^,],%f,%11[^,],%d-%d,%19[^\n]",
-        acc[accCounter].accountNumber,
-        acc[accCounter].name,
-        acc[accCounter].email,
-        &acc[accCounter].balance,
-        acc[accCounter].mobile,
-        &acc[accCounter].open.month,
-        &acc[accCounter].open.year,
-        acc[accCounter].status) == 8)
+    accCounter=0;
+    while(!feof(accounts))
     {
-        char *p = acc[accCounter].status;
-        while (*p == ' ') p++;
-       strcpy(acc[accCounter].status,p);
+        if (fscanf(accounts, " %10[^,],",acc[accCounter].accountNumber) != 1)
+            break;
+        fscanf(accounts, "%99[^,],",acc[accCounter].name);
+        fscanf(accounts, "%99[^,],",acc[accCounter].email);
+        fscanf(accounts, "%f,",&acc[accCounter].balance);
+        fscanf(accounts, "%11[^,],",acc[accCounter].mobile);
+        fscanf(accounts,"%d-%d,",&acc[accCounter].open.month,&acc[accCounter].open.year);
+        fscanf(accounts,"%19[^,\n]",acc[accCounter].status);
 
-       acc[accCounter].status[strcspn(acc[accCounter].status, "\r\n")] = '\0';
-
+        char *p=acc[accCounter].status;
+        while(*p==' ')  p++;
+        strcpy(acc[accCounter].status,p);
+        acc[accCounter].status[strcspn(acc[accCounter].status, "\r\n")] = '\0';
         accCounter++;
     }
-
     fclose(accounts);
 }

@@ -71,12 +71,18 @@ void withdraw()
         return;
     }
 
+    if (acc[idx].balance <= 0)
+    {
+        printf("\033[1;31mCannot withdraw. Balance is zero!\033[0m\n");
+        return;
+    }
+
     float amount;
     daily_limit(&amount, idx);
 
     acc[idx].balance -= amount;
-    printf("\033[1;32mWithdrawal successful!\033[0m\nAmount withdrawn: %.2f\n", amount);
-    printf("Remaining balance: %.2f\n", acc[idx].balance);
+    printf("\033[1;32mWithdrawal successful!\033[0m\n\033[1;33mAmount withdrawn: %.2f\033[0m\n", amount);
+    printf("\033[1;33mRemaining balance: %.2f\033[0m\n", acc[idx].balance);
 
     char transaction[MAX_BUFFER];
     sprintf(transaction, "WITHDRAW: %.2f", amount);
@@ -127,7 +133,7 @@ void deposit()
 
     acc[idx].balance += amount;
     printf("\033[1;32mDeposit successful!\033[0m \033[1;37mAmount deposited: %.2f\033[0m\n", amount);
-    printf("New balance: %.2f\n", acc[idx].balance);
+    printf("\033[1;32mNew balance: %.2f\033[0m\n", acc[idx].balance);
 
     char transaction[MAX_BUFFER];
     sprintf(transaction, "DEPOSIT: %.2f", amount);
@@ -148,6 +154,11 @@ void transfer()
         printf("\033[1;31mSender account is inactive! Cannot process transfer.\033[0m\n");
         return;
     }
+    if (acc[senderIdx].balance <= 0)
+    {
+        printf("\033[1;31mCannot transfer money. Balance is zero!\033[0m\n");
+        return;
+    }
 
     printf("RECEIVER --->\n");
     int receiverIdx = get_account_index();
@@ -158,6 +169,11 @@ void transfer()
         printf("\033[1;31mReceiver account is inactive! Cannot process transfer.\033[0m\n");
         return;
     }
+
+    if (senderIdx == receiverIdx) {
+    printf("\033[1;31mCannot transfer to the same account.\033[0m\n");
+    return;
+}
 
     float amount;
     const float MAX_TRANSFER = 10000.0f;
