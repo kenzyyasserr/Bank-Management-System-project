@@ -58,7 +58,7 @@ void printSorted(account arr[], const char *filename)
     int s, count = 0;
     int check = 1;
 
-    FILE *fp = fopen("utilities/accounts.txt", "r");
+    FILE *fp = fopen("accounts.txt", "r");
     if (!fp) {
         printf("\033[1;31mError: Cannot open file '%s'\033[0m\n", filename);
         return;

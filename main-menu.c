@@ -82,7 +82,7 @@ void main_menu()
         else if (!strcmp(choose,"11") || !strcasecmp(choose,"PRINT"))
         {
             printf("\033[1;37mYou chose\033[0m \033[1;32mPRINT\033[0m\n");
-            printSorted(acc, "utilities/accounts.txt");
+            printSorted(acc, "accounts.txt");
         }
         else if (!strcmp(choose,"12") || !strcasecmp(choose,"DELETE MULTIPLE"))
         {
