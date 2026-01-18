@@ -3,7 +3,7 @@
 // load file
 void load_users()
 {
-    FILE *users=fopen("users.txt", "r");
+    FILE *users=fopen("utilities/users.txt", "r");
     if(users==NULL)
     {
         printf("\033[1;31mError could not open users.txt\033[0m\n");  //printed in red

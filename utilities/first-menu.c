@@ -37,7 +37,7 @@ void first_menu()
 // --------------------------- Load accounts after login -------------------------
 void load_accounts()
 {
-    FILE *accounts=fopen("accounts.txt","r");
+    FILE *accounts=fopen("utilities/accounts.txt","r");
     if(accounts==NULL)
     {
         printf("Error could not open account.txt\n");
