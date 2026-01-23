@@ -1,5 +1,5 @@
 # Bank Management System
----
+
 ## Project Overview
 A console-based **Bank Management System** developed in **C**, designed to imitate real-life banking systems by supporting core operations such as account creation and basic transactions, including deposits, withdrawals, and transfers. The project focuses on structured programming, efficient data handling, and reliable execution of banking functionalities.
 
@@ -14,7 +14,7 @@ A console-based **Bank Management System** developed in **C**, designed to imita
 
 ## Dependencies
 - C Programming Language
-- Standard C libraries (```stdio.h```, ```stdlib.h```, ```string.h```, ```ctype.h```, ```time.h``)
+- Standard C libraries (```stdio.h```, ```stdlib.h```, ```string.h```, ```ctype.h```, ```time.h```)
 
 ## Notes
 - The project is intended for educational purposes
