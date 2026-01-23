@@ -1,7 +1,21 @@
 # Bank Management System
+---
 ## Project Overview
-A Bank Management System developed in **C**, which aims to practice building a complete and reliable software system that models common banking operations such as account creation, updating user information, deposits, withdrawals, transfers and many other basic operations.
+A console-based **Bank Management System** developed in **C**, designed to imitate real-life banking systems by supporting core operations such as account creation and basic transactions, including deposits, withdrawals, and transfers. The project focuses on structured programming, efficient data handling, and reliable execution of banking functionalities.
 
-The system stores all account and transaction data in files, allowing information to persist between program runs. A login mechanism restricts access to authorised users, and each operation includes validation and confirmation steps to reduce errors and maintain data consistency.
+## Features
+- Account creation and management
+- Support for basic banking transactions (deposits, withdrawals, transfers)
+- Persistent data storage using text files
+- Retrieval and updating of user data from files
+- Use of ```struct``` data types to model bank accounts
+- String handling using functions from the ```string.h``` library
+- Menu-driven console interface for ease of use
 
-The project focuses on correctness, structure and maintainability. The code is organised into multiple source and header files, uses structures to represent accounts and transactions, and relies on helper functions to keep the logic clear and reusable. A colour-coded console interface is used to improve readability without shifting attention away from the core functionality
+## Dependencies
+- C Programming Language
+- Standard C libraries (```stdio.h```, ```stdlib.h```, ```string.h```, ```ctype.h```, ```time.h``)
+
+## Notes
+- The project is intended for educational purposes
+- It was developed collaboratively with colleagues, emphasising teamwork and clean code practices
